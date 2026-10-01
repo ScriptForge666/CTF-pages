@@ -60,6 +60,13 @@
 
         let main = document.getElementById("main");
         
+        function showToastNotification(msg) {
+            const toastComp = document.getElementById('global-toast');
+            if (toastComp && toastComp.showToast) {
+                toastComp.showToast(msg);
+           }
+      }
+
         async function checkFlagStatus() {
             try {
                 // 1. 发起请求
@@ -77,6 +84,7 @@
                 // 4. 根据返回的 isFlag 状态做前端逻辑处理
                 if (data.flag) {
                     console.log("验证通过！");
+                    showToastNotification("恭喜你，通关啦！");
                     main.innerHTML = `<h1>恭喜你，通关啦！</h1>`;
                 } else {
                     console.log("Flag 错误或未设置");
@@ -91,6 +99,7 @@
 
             } catch (error) {
                 console.error("发生错误:", error);
+                showToastNotification("请求失败，请检查网络或稍后再试。");
             }
         }
 
@@ -122,10 +131,12 @@
                     window.history.pushState({}, '', url);
                 } else {
                     console.log("Token 添加失败");
+                    showToastNotification("Token 添加失败，请稍后再试。");
                 }
 
             } catch (error) {
                 console.error("发生错误:", error);
+                showToastNotification("请求失败，请检查网络或稍后再试。");
             }
         }
         async function init() {
