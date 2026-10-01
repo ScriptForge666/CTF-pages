@@ -22,6 +22,36 @@
     <link rel="stylesheet" href="https://cdn.script-forge.top/Scriptforge-css.css">
 </head>
 <body>
+    <!-- 全局 Toast 容器组件 -->
+    <sf-toast id="global-toast"></sf-toast>
+
+    <sf-menu>
+    <a href="#" class="text-xl font-bold tracking-tight" style="color: var(--bg-primary);">
+      <i class="fa fa-code mr-1"></i> ScriptForge
+    </a>
+    <a href="https://www.script-forge.top" class="menu-link">
+      <i class="fa fa-solid fa-user-gear"></i>
+      <span>我的主页</span>
+    </a>
+    <a href="https://www.script-forge.top#projects" class="menu-link">
+      <i class="fa fa-solid fa-cubes"></i>
+      <span>核心项目</span>
+    </a>
+    <a href="https://www.script-forge.top#contact" class="menu-link">
+      <i class="fa fa-solid fa-paper-plane"></i>
+      <span>联系方式</span>
+    </a>
+
+    <div slot="right" class="flex items-center gap-3">
+      <a href="https://github.com/ScriptForge666" target="_blank" class="text-gray-500 hover:text-blue-500 transition-colors text-lg" title="GitHub Profile">
+        <i class="fa fa-brands fa-github"></i>
+      </a>
+      <div class="flex items-center gap-2 pl-2 border-l border-gray-300 dark:border-gray-700">
+        <theme-button id="theme-widget" size="1.8" value=""></theme-button>
+      </div>
+    </div>
+  </sf-menu>
+
     <div id="main"></div>
     <script src="https://www.script-forge.top/Day-night-toggle-button/script.js"></script>
     <script src="https://cdn.script-forge.top/Scriptforge-js.js"></script>
