@@ -23,30 +23,86 @@
 </head>
 <body>
     <div id="main"></div>
+    <script src="https://www.script-forge.top/Day-night-toggle-button/script.js"></script>
+    <script src="https://cdn.script-forge.top/Scriptforge-js.js"></script>
+    <script src="https://www.script-forge.top/toggle-theme.js"></script>
     <script>
 
         let main = document.getElementById("main");
+        
+        async function checkFlagStatus() {
+            try {
+                // 1. 发起请求
+                const response = await fetch('/api/check-first-flag', {
+                    method: 'GET',
+                });
+                // 2. 检查 HTTP 状态码是否成功 (200-299)
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码: ${response.status}`);
+                }
 
-        function getCookie(name) {
-            return document.cookie.split('; ').reduce((r, v) => {
-                const [k, val] = v.split('=');
-                return k === name ? val : r;
-            }, null);
+                // 3. 将响应体解析为 JSON 对象
+                const data = await response.json();
+
+                // 4. 根据返回的 isFlag 状态做前端逻辑处理
+                if (data.flag) {
+                    console.log("验证通过！");
+                    main.innerHTML = `<h1>恭喜你，通关啦！</h1>`;
+                } else {
+                    console.log("Flag 错误或未设置");
+                    main.innerHTML = `
+                    <main class="page-wrapper py-8">
+                        <div class="container mx-auto px-4">
+                            <h1 class="text-3xl font-bold mb-4">欢迎来到 ScriptForge 的奇怪 CTF 问题页面</h1>
+                            <p class="mb-4">请尝试找到隐藏的 flag！</p>
+                        </div>
+                    </main>`;
+                }
+
+            } catch (error) {
+                console.error("发生错误:", error);
+            }
         }
 
-        if (getCookie('flag') === context.env.FIRST_FLAG) {
-            
-        } else {
-            main.innerHTML = `
-                <main class="page-wrapper py-8">
-                    <div class="container mx-auto px-4">
-                        <h1 class="text-3xl font-bold mb-4">欢迎来到 ScriptForge 的奇怪 CTF 问题页面</h1>
-                        <p class="mb-4">请尝试找到隐藏的 flag！</p>
-                    </div>
-                </main>
-            `;
-        }
+        async function addToken() {
+            try {
+                // 1. 发起请求
+                const response = await fetch('/api/strange-jwt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    },
+                    body: JSON.stringify({})
+                });
+                // 2. 检查 HTTP 状态码是否成功 (200-299)
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码: ${response.status}`);
+                }
 
+                // 3. 将响应体解析为 JSON 对象
+                const data = await response.json();
+
+                if(data.token) {
+                    console.log("Token 添加成功！");
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('token', data.token);
+                    window.history.pushState({}, '', url);
+                } else {
+                    console.log("Token 添加失败");
+                }
+
+            } catch (error) {
+                console.error("发生错误:", error);
+            }
+        }
+        async function init() {
+            await checkFlagStatus();
+            await addToken();
+        }
+        init();
         document.cookie = "UHV0IHRoZSBmaXJzdCBmbGFnIGludG8gdGhlIENvb2tpZSAiZmxhZyI=H7s6Ow3szDUt4LKtKfDzjUO7ksH5LVTmlzhDz-b6mkbXVkVbqgqh5hQ9f2gbzzF-Zb7XoT2bLrBd05j9W_bl-erDy7_k8dkZno3_1zDdyiWFbwosiC1z1JDHeUbhp0uBe223x45Q7j9XgXTPChFYoVShT8zla3zV4pBkBtGSeZUjojYEW3BVMYhk62nSYY_7RQfXxcEp7fX3RwEbrbI0zZ441EQRIq6f93z9m0myZWA8vNQ6na4t2iI-fDdcmYprzT1qvJ2FWILWDJdevJTPQRV-hvdGjSrbHZB_q2I9ZUQM1XP16iusWiOThxZTPuR7YnbY_I7MiQSkeMrr5H59vg";
     </script>
 </body>
