@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script src="https://www.script-forge.top/head.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScriptForge's Stange CTF Problems</title>
+    <meta name="description" content="Some stange CTF problems">
+    
+    <meta property="og:title" content="ScriptForge's Stange CTF Problems">
+    <meta property="og:description" content="Some starnge CTF Problems">
+    <meta property="og:image" content="https://www.script-forge.top/dependency/ScriptForge.png">
+    <link rel="icon" href="https://www.script-forge.top/dependency/ScriptForge.png" type="image/png">
+
+    <!-- 引入 Tailwind CSS CDN / 本地样式 -->
+    <link rel="stylesheet" href="https://www.script-forge.top/css/tailwind.min.css">
+
+    <!-- 引入 Font-Awesome 图标库 -->
+    <link href="https://www.script-forge.top/fontawesome-free-7.3.1/css/all.min.css" rel="stylesheet">
+
+    <!-- 引入 ScriptForge 核心 CSS & JS 库 -->
+    <link rel="stylesheet" href="https://cdn.script-forge.top/Scriptforge-css.css">
+</head>
+<body>
+    <div id="main"></div>
+    <script>
+
+        let main = document.getElementById("main");
+
+        function getCookie(name) {
+            return document.cookie.split('; ').reduce((r, v) => {
+                const [k, val] = v.split('=');
+                return k === name ? val : r;
+            }, null);
+        }
+
+        if (getCookie('flag') === context.env.FIRST_FLAG) {
+            
+        } else {
+            main.innerHTML = `
+                <main class="page-wrapper py-8">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-3xl font-bold mb-4">欢迎来到 ScriptForge 的奇怪 CTF 问题页面</h1>
+                        <p class="mb-4">请尝试找到隐藏的 flag！</p>
+                    </div>
+                </main>
+            `;
+        }
+
+        document.cookie = "UHV0IHRoZSBmaXJzdCBmbGFnIGludG8gdGhlIENvb2tpZSAiZmxhZyI=H7s6Ow3szDUt4LKtKfDzjUO7ksH5LVTmlzhDz-b6mkbXVkVbqgqh5hQ9f2gbzzF-Zb7XoT2bLrBd05j9W_bl-erDy7_k8dkZno3_1zDdyiWFbwosiC1z1JDHeUbhp0uBe223x45Q7j9XgXTPChFYoVShT8zla3zV4pBkBtGSeZUjojYEW3BVMYhk62nSYY_7RQfXxcEp7fX3RwEbrbI0zZ441EQRIq6f93z9m0myZWA8vNQ6na4t2iI-fDdcmYprzT1qvJ2FWILWDJdevJTPQRV-hvdGjSrbHZB_q2I9ZUQM1XP16iusWiOThxZTPuR7YnbY_I7MiQSkeMrr5H59vg";
+    </script>
+</body>
+</html>
